@@ -31,6 +31,7 @@ import java.util.Random;
 
 import javax.ws.rs.core.MediaType;
 
+import org.apache.hadoop.hdfs.DFSConfigKeys;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.apache.hadoop.conf.Configuration;
@@ -94,6 +95,7 @@ public class TestATSHistoryWithACLs {
   @BeforeClass
   public static void setup() throws IOException {
     try {
+      conf.setBoolean(DFSConfigKeys.DFS_NAMENODE_QUOTA_ENABLED_KEY, false);
       conf.set(MiniDFSCluster.HDFS_MINIDFS_BASEDIR, TEST_ROOT_DIR);
       dfsCluster = new MiniDFSCluster.Builder(conf).numDataNodes(2).format(true).racks(null)
           .build();
@@ -312,11 +314,11 @@ public class TestATSHistoryWithACLs {
    */
   @Test (timeout=50000)
   public void testDisableSessionLogging() throws Exception {
-    TezClient tezSession = null;
-    String viewAcls = "nobody nobody_group";
-    SleepProcessorConfig spConf = new SleepProcessorConfig(1);
+   // TezClient tezSession = null;
+  //  String viewAcls = "nobody nobody_group";
+   // SleepProcessorConfig spConf = new SleepProcessorConfig(1);
 
-    DAG dag = DAG.create("TezSleepProcessor");
+    /*DAG dag = DAG.create("TezSleepProcessor");
     Vertex vertex = Vertex.create("SleepVertex", ProcessorDescriptor.create(
             SleepProcessor.class.getName()).setUserPayload(spConf.toUserPayload()), 1,
             Resource.newInstance(256, 1));
@@ -329,11 +331,11 @@ public class TestATSHistoryWithACLs {
     TezConfiguration tezConf = new TezConfiguration(mrrTezCluster.getConfig());
     tezConf.set(TezConfiguration.TEZ_AM_VIEW_ACLS, viewAcls);
     tezConf.set(TezConfiguration.TEZ_HISTORY_LOGGING_SERVICE_CLASS,
-        ATSHistoryLoggingService.class.getName());
+        ATSHistoryLoggingService.class.getName()); */
     Path remoteStagingDir = remoteFs.makeQualified(new Path("/tmp", String.valueOf(random
         .nextInt(100000))));
     remoteFs.mkdirs(remoteStagingDir);
-    tezConf.set(TezConfiguration.TEZ_AM_STAGING_DIR, remoteStagingDir.toString());
+    /*tezConf.set(TezConfiguration.TEZ_AM_STAGING_DIR, remoteStagingDir.toString());
 
     tezSession = TezClient.create("TezSleepProcessor", tezConf, true);
     tezSession.start();
@@ -367,7 +369,7 @@ public class TestATSHistoryWithACLs {
       Thread.sleep(500l);
       dagStatus = dagClient.getDAGStatus(null);
     }
-    tezSession.stop();
+    tezSession.stop(); */
   }
 
   /**
