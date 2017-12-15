@@ -51,6 +51,9 @@ public class StateMachineTez<STATE extends Enum<STATE>, EVENTTYPE extends Enum<E
     return realStatemachine.getCurrentState();
   }
 
+  @Override
+  public void setCurrentState(STATE currentState) { realStatemachine.setCurrentState(currentState); }
+
   @SuppressWarnings("unchecked")
   @Override
   public STATE doTransition(EVENTTYPE eventType, EVENT event) throws

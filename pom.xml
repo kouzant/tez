@@ -37,7 +37,7 @@
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <clover.license>${user.home}/clover.license</clover.license>
-    <hadoop.version>2.7.0</hadoop.version>
+    <hadoop.version>2.8.2.3-SNAPSHOT</hadoop.version>
     <jetty.version>6.1.26</jetty.version>
     <netty.version>3.6.2.Final</netty.version>
     <pig.version>0.13.0</pig.version>
@@ -80,6 +80,26 @@
 
   <repositories>
     <repository>
+      <id>sics-release</id>
+      <name>SICS Release Repository</name>
+      <url>http://kompics.sics.se/maven/repository</url>
+      <releases>
+        <enabled>true</enabled>
+      </releases>
+      <snapshots>
+      </snapshots>
+    </repository>
+    <repository>
+      <id>sics-snapshot-repository</id>
+      <name>SICS Snapshot Repository</name>
+      <url>http://kompics.sics.se/maven/snapshotrepository</url>
+      <releases>
+      </releases>
+      <snapshots>
+        <enabled>true</enabled>
+      </snapshots>
+    </repository>
+    <repository>
       <id>${distMgmtSnapshotsId}</id>
       <name>${distMgmtSnapshotsName}</name>
       <url>${distMgmtSnapshotsUrl}</url>
@@ -87,6 +107,12 @@
   </repositories>
 
   <pluginRepositories>
+    <pluginRepository>
+      <id>sics-snapshot-repository</id>
+      <name>SICS Snapshot Repository</name>
+      <url>http://kompics.sics.se/maven/snapshotrepository</url>
+      <layout>default</layout>
+    </pluginRepository>
     <pluginRepository>
       <id>maven2-repository.atlassian</id>
       <name>Atlassian Maven Repository</name>
@@ -743,13 +769,13 @@
     <module>tez-examples</module>
     <module>tez-tests</module>
     <module>tez-dag</module>
-    <module>tez-ext-service-tests</module>
-    <module>tez-ui</module>
+    <!-- <module>tez-ext-service-tests</module> -->
+    <!-- <module>tez-ui</module> -->
     <module>tez-plugins</module>
     <module>tez-tools</module>
     <module>hadoop-shim-impls</module>
     <module>tez-dist</module>
-    <module>docs</module>
+    <!-- <module>docs</module> -->
   </modules>
 
   <build>

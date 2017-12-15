@@ -22,6 +22,7 @@
     <groupId>org.apache.tez</groupId>
     <artifactId>tez</artifactId>
     <version>0.9.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>tez-dist</artifactId>
 
@@ -59,7 +60,7 @@
     <profile>
       <id>hadoop27</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <dependencies>
         <dependency>
@@ -77,7 +78,7 @@
     <profile>
       <id>hadoop28</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <dependencies>
         <dependency>
