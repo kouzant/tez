@@ -22,6 +22,7 @@
     <groupId>org.apache.tez</groupId>
     <artifactId>tez</artifactId>
     <version>0.9.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>tez-ui</artifactId>
   <packaging>war</packaging>

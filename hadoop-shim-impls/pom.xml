@@ -21,6 +21,7 @@
     <artifactId>tez</artifactId>
     <groupId>org.apache.tez</groupId>
     <version>0.9.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>hadoop-shim-impls</artifactId>
   <packaging>pom</packaging>
@@ -29,7 +30,7 @@
     <profile>
       <id>hadoop27</id>
       <activation>
-        <activeByDefault>true</activeByDefault>
+        <activeByDefault>false</activeByDefault>
       </activation>
       <modules>
         <module>hadoop-shim-2.7</module>
@@ -38,7 +39,7 @@
     <profile>
       <id>hadoop28</id>
       <activation>
-        <activeByDefault>false</activeByDefault>
+        <activeByDefault>true</activeByDefault>
       </activation>
       <modules>
         <module>hadoop-shim-2.8</module>

@@ -712,7 +712,7 @@ public class TestShuffleHandler {
       shuffleHandler
         .initializeApplication(new ApplicationInitializationContext(user,
           appId, ByteBuffer.wrap(outputBuffer.getData(), 0,
-            outputBuffer.getLength())));
+            outputBuffer.getLength()), "/tmp"));
       URL url =
           new URL(
               "http://127.0.0.1:"
@@ -826,7 +826,7 @@ public class TestShuffleHandler {
       jt.write(outputBuffer);
       shuffle.initializeApplication(new ApplicationInitializationContext(user,
           appId, ByteBuffer.wrap(outputBuffer.getData(), 0,
-            outputBuffer.getLength())));
+            outputBuffer.getLength()), "/tmp"));
 
       // verify we are authorized to shuffle
       int rc = getShuffleResponseCode(shuffle, jt);
@@ -893,7 +893,7 @@ public class TestShuffleHandler {
       jt.write(outputBuffer);
       shuffle.initializeApplication(new ApplicationInitializationContext(user,
           appId, ByteBuffer.wrap(outputBuffer.getData(), 0,
-              outputBuffer.getLength())));
+              outputBuffer.getLength()), "/tmp"));
 
       // verify we are authorized to shuffle
       int rc = getShuffleResponseCode(shuffle, jt);
@@ -1050,7 +1050,7 @@ public class TestShuffleHandler {
       shuffleHandler
           .initializeApplication(new ApplicationInitializationContext(user,
           appId, ByteBuffer.wrap(outputBuffer.getData(), 0,
-          outputBuffer.getLength())));
+          outputBuffer.getLength()), "/tmp"));
       URL url =
           new URL(
               "http://127.0.0.1:"
@@ -1126,7 +1126,7 @@ public class TestShuffleHandler {
       shuffleHandler
           .initializeApplication(new ApplicationInitializationContext(user,
               appId, ByteBuffer.wrap(outputBuffer.getData(), 0,
-              outputBuffer.getLength())));
+              outputBuffer.getLength()), "/tmp"));
       URL url =
           new URL(
               "http://127.0.0.1:"

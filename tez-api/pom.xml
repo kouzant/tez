@@ -21,6 +21,7 @@
     <groupId>org.apache.tez</groupId>
     <artifactId>tez</artifactId>
     <version>0.9.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>tez-api</artifactId>
 
@@ -46,28 +47,34 @@
       <artifactId>jettison</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-common</artifactId>
+      <version>${hadoop.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-auth</artifactId>
+      <version>${hadoop.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-annotations</artifactId>
+      <version>${hadoop.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-yarn-api</artifactId>
+      <version>${hadoop.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-yarn-common</artifactId>
+      <version>${hadoop.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-yarn-client</artifactId>
+      <version>${hadoop.version}</version>
     </dependency>
     <dependency>
      <groupId>org.apache.commons</groupId>
@@ -94,14 +101,16 @@
       <artifactId>jersey-json</artifactId>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-hdfs</artifactId>
+      <version>${hadoop.version}</version>
       <scope>test</scope>
       <type>test-jar</type>
     </dependency>
     <dependency>
-      <groupId>org.apache.hadoop</groupId>
+      <groupId>io.hops</groupId>
       <artifactId>hadoop-common</artifactId>
+      <version>${hadoop.version}</version>
       <type>test-jar</type>
       <scope>test</scope>
     </dependency>
@@ -141,8 +150,9 @@
         <artifactId>apache-rat-plugin</artifactId>
       </plugin>
       <plugin>
-        <groupId>org.apache.hadoop</groupId>
+        <groupId>io.hops</groupId>
         <artifactId>hadoop-maven-plugins</artifactId>
+        <version>${hadoop.version}</version>
         <executions>
           <execution>
             <id>compile-protoc</id>
@@ -211,8 +221,9 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>org.apache.hadoop</groupId>
+          <groupId>io.hops</groupId>
           <artifactId>hadoop-hdfs</artifactId>
+          <version>${hadoop.version}</version>
           <scope>runtime</scope>
        </dependency>
       </dependencies>
@@ -221,7 +232,7 @@
       <id>hadoop28</id>
       <dependencies>
         <dependency>
-          <groupId>org.apache.hadoop</groupId>
+          <groupId>io.hops</groupId>
           <artifactId>hadoop-hdfs-client</artifactId>
           <version>${hadoop.version}</version>
        </dependency>
