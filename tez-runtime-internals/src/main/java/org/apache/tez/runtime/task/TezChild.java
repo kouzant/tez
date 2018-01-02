@@ -125,7 +125,7 @@ public class TezChild {
   private final TezExecutors sharedExecutor;
 
   public TezChild(Configuration conf, String host, int port, String containerIdentifier,
-      String tokenIdentifier, int appAttemptNumber, String workingDir, String[] localDirs,
+      int appAttemptNumber, String workingDir, String[] localDirs,
       Map<String, String> serviceProviderEnvMap,
       ObjectRegistryImpl objectRegistry, String pid,
       ExecutionContext executionContext,
@@ -174,7 +174,7 @@ public class TezChild {
       }
     }
 
-    UserGroupInformation taskOwner = UserGroupInformation.createRemoteUser(tokenIdentifier);
+    UserGroupInformation taskOwner = UserGroupInformation.createRemoteUser(user);
     Token<JobTokenIdentifier> jobToken = TokenCache.getSessionToken(credentials);
 
     String auxiliaryService = defaultConf.get(TezConfiguration.TEZ_AM_SHUFFLE_AUXILIARY_SERVICE_ID,
@@ -454,7 +454,7 @@ public class TezChild {
   }
 
   public static TezChild newTezChild(Configuration conf, String host, int port, String containerIdentifier,
-      String tokenIdentifier, int attemptNumber, String[] localDirs, String workingDirectory,
+      int attemptNumber, String[] localDirs, String workingDirectory,
       Map<String, String> serviceProviderEnvMap, @Nullable String pid,
       ExecutionContext executionContext, Credentials credentials, long memAvailable, String user,
       TezTaskUmbilicalProtocol tezUmbilical, boolean updateSysCounters, HadoopShim hadoopShim)
@@ -470,8 +470,8 @@ public class TezChild {
     // singleton of ObjectRegistry for this JVM
     ObjectRegistryImpl objectRegistry = new ObjectRegistryImpl();
 
-    return new TezChild(conf, host, port, containerIdentifier, tokenIdentifier,
-        attemptNumber, workingDirectory, localDirs, serviceProviderEnvMap, objectRegistry, pid,
+    return new TezChild(conf, host, port, containerIdentifier, attemptNumber,
+        workingDirectory, localDirs, serviceProviderEnvMap, objectRegistry, pid,
         executionContext, credentials, memAvailable, user, tezUmbilical, updateSysCounters,
         hadoopShim);
   }
@@ -517,7 +517,7 @@ public class TezChild {
     }
 
     TezChild tezChild = newTezChild(defaultConf, host, port, containerIdentifier,
-        tokenIdentifier, attemptNumber, localDirs, System.getenv(Environment.PWD.name()),
+        attemptNumber, localDirs, System.getenv(Environment.PWD.name()),
         System.getenv(), pid, new ExecutionContextImpl(System.getenv(Environment.NM_HOST.name())),
         credentials, Runtime.getRuntime().maxMemory(), System
             .getenv(ApplicationConstants.Environment.USER.toString()), null, true, hadoopShim);

@@ -415,7 +415,7 @@ public class LocalContainerLauncher extends DagContainerLauncher {
       memAvailable = Runtime.getRuntime().maxMemory() / numExecutors;
     }
     TezChild tezChild =
-        TezChild.newTezChild(defaultConf, null, 0, containerId.toString(), tokenIdentifier,
+        TezChild.newTezChild(defaultConf, null, 0, containerId.toString(),
             attemptNumber, localDirs, workingDirectory, containerEnv, "", executionContext, credentials,
             memAvailable, context.getUser(), tezTaskUmbilicalProtocol, false,
             context.getHadoopShim());
