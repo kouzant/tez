@@ -19,7 +19,7 @@
   <groupId>org.apache.tez</groupId>
   <artifactId>tez</artifactId>
   <packaging>pom</packaging>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.9.1</version>
   <name>tez</name>
 
   <licenses>
@@ -37,7 +37,7 @@
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <clover.license>${user.home}/clover.license</clover.license>
-    <hadoop.version>2.8.2.3-SNAPSHOT</hadoop.version>
+    <hadoop.version>2.8.2.3</hadoop.version>
     <jetty.version>6.1.26</jetty.version>
     <netty.version>3.6.2.Final</netty.version>
     <pig.version>0.13.0</pig.version>
@@ -110,7 +110,7 @@
     <pluginRepository>
       <id>sics-snapshot-repository</id>
       <name>SICS Snapshot Repository</name>
-      <url>http://kompics.sics.se/maven/snapshotrepository</url>
+      <url>http://kompics.sics.se/maven/repository</url>
       <layout>default</layout>
     </pluginRepository>
     <pluginRepository>
