@@ -36,15 +36,15 @@
             <useTransitiveDependencies>false</useTransitiveDependencies>
             <excludes>
               <exclude>*:*:test-jar</exclude>
-              <exclude>org.apache.hadoop:hadoop-annotations</exclude>
-              <exclude>org.apache.hadoop:hadoop-auth</exclude>
-              <exclude>org.apache.hadoop:hadoop-common</exclude>
-              <exclude>org.apache.hadoop:hadoop-hdfs</exclude>
-              <exclude>org.apache.hadoop:hadoop-yarn-api</exclude>
-              <exclude>org.apache.hadoop:hadoop-yarn-client</exclude>
-              <exclude>org.apache.hadoop:hadoop-yarn-common</exclude>
-              <exclude>org.apache.hadoop:hadoop-yarn-server-web-proxy</exclude>
-              <exclude>org.apache.tez:*</exclude>
+              <exclude>io.hops:hadoop-annotations</exclude>
+              <exclude>io.hops:hadoop-auth</exclude>
+              <exclude>io.hops:hadoop-common</exclude>
+              <exclude>io.hops:hadoop-hdfs</exclude>
+              <exclude>io.hops:hadoop-yarn-api</exclude>
+              <exclude>io.hops:hadoop-yarn-client</exclude>
+              <exclude>io.hops:hadoop-yarn-common</exclude>
+              <exclude>io.hops:hadoop-yarn-server-web-proxy</exclude>
+              <exclude>io.hops.tez:*</exclude>
             </excludes>
           </dependencySet>
         </dependencySets>

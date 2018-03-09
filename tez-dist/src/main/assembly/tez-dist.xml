@@ -35,7 +35,7 @@
             <outputDirectory>/lib</outputDirectory>
             <excludes>
               <exclude>*:*:test-jar</exclude>
-              <exclude>org.apache.tez:*</exclude>
+              <exclude>io.hops.tez:*</exclude>
             </excludes>
           </dependencySet>
         </dependencySets>

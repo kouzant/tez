@@ -16,10 +16,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.apache.tez</groupId>
+  <groupId>io.hops.tez</groupId>
   <artifactId>tez</artifactId>
   <packaging>pom</packaging>
-  <version>0.9.1-SNAPSHOT</version>
+  <version>0.9.1.1-SNAPSHOT</version>
   <name>tez</name>
 
   <licenses>
@@ -37,7 +37,7 @@
   <properties>
     <maven.test.redirectTestOutputToFile>true</maven.test.redirectTestOutputToFile>
     <clover.license>${user.home}/clover.license</clover.license>
-    <hadoop.version>2.8.2.3-SNAPSHOT</hadoop.version>
+    <hadoop.version>2.8.2.8-SNAPSHOT</hadoop.version>
     <jetty.version>6.1.26</jetty.version>
     <netty.version>3.6.2.Final</netty.version>
     <pig.version>0.13.0</pig.version>
@@ -80,20 +80,11 @@
 
   <repositories>
     <repository>
-      <id>sics-release</id>
-      <name>SICS Release Repository</name>
-      <url>http://kompics.sics.se/maven/repository</url>
+      <id>hops-repository</id>
+      <name>Hops Repository</name>
+      <url>https://bbc1.sics.se/archiva/repository/Hops/</url>
       <releases>
         <enabled>true</enabled>
-      </releases>
-      <snapshots>
-      </snapshots>
-    </repository>
-    <repository>
-      <id>sics-snapshot-repository</id>
-      <name>SICS Snapshot Repository</name>
-      <url>http://kompics.sics.se/maven/snapshotrepository</url>
-      <releases>
       </releases>
       <snapshots>
         <enabled>true</enabled>
@@ -108,10 +99,9 @@
 
   <pluginRepositories>
     <pluginRepository>
-      <id>sics-snapshot-repository</id>
-      <name>SICS Snapshot Repository</name>
-      <url>http://kompics.sics.se/maven/snapshotrepository</url>
-      <layout>default</layout>
+      <id>hops-repository</id>
+      <name>Hops Repository</name>
+      <url>https://bbc1.sics.se/archiva/repository/Hops/</url>
     </pluginRepository>
     <pluginRepository>
       <id>maven2-repository.atlassian</id>
@@ -130,97 +120,97 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>hadoop-shim</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>hadoop-shim</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-api</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-common</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-common</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-runtime-internals</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-runtime-internals</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-runtime-library</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-mapreduce</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-examples</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-tests</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-tests</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-dag</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-tools</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-plugins</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-yarn-timeline-history</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-yarn-timeline-history</artifactId>
         <version>${project.version}</version>
         <type>test-jar</type>
       </dependency>
       <dependency>
-        <groupId>org.apache.tez</groupId>
+        <groupId>io.hops.tez</groupId>
         <artifactId>tez-ext-service-tests</artifactId>
         <version>${project.version}</version>
       </dependency>
