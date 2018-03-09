@@ -19,9 +19,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.apache.tez</groupId>
+    <groupId>io.hops.tez</groupId>
     <artifactId>tez</artifactId>
-    <version>0.9.1</version>
+    <version>0.9.1.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
   <artifactId>tez-dist</artifactId>
@@ -30,22 +30,22 @@
 
   <dependencies>
     <dependency>
-      <groupId>org.apache.tez</groupId>
+      <groupId>io.hops.tez</groupId>
       <artifactId>tez-api</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.tez</groupId>
+      <groupId>io.hops.tez</groupId>
       <artifactId>tez-dag</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.tez</groupId>
+      <groupId>io.hops.tez</groupId>
       <artifactId>tez-examples</artifactId>
       <version>${project.version}</version>
     </dependency>
     <dependency>
-      <groupId>org.apache.tez</groupId>
+      <groupId>io.hops.tez</groupId>
       <artifactId>tez-tests</artifactId>
       <version>${project.version}</version>
       <type>test-jar</type>
@@ -64,12 +64,12 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>org.apache.tez</groupId>
+          <groupId>io.hops.tez</groupId>
           <artifactId>tez-yarn-timeline-history-with-acls</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.tez</groupId>
+          <groupId>io.hops.tez</groupId>
           <artifactId>hadoop-shim-2.7</artifactId>
           <version>${project.version}</version>
         </dependency>
@@ -82,22 +82,22 @@
       </activation>
       <dependencies>
         <dependency>
-          <groupId>org.apache.tez</groupId>
+          <groupId>io.hops.tez</groupId>
           <artifactId>tez-yarn-timeline-history-with-acls</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.tez</groupId>
+          <groupId>io.hops.tez</groupId>
           <artifactId>tez-yarn-timeline-history-with-fs</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.tez</groupId>
+          <groupId>io.hops.tez</groupId>
           <artifactId>tez-yarn-timeline-cache-plugin</artifactId>
           <version>${project.version}</version>
         </dependency>
         <dependency>
-          <groupId>org.apache.tez</groupId>
+          <groupId>io.hops.tez</groupId>
           <artifactId>hadoop-shim-2.8</artifactId>
           <version>${project.version}</version>
         </dependency>

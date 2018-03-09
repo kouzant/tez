@@ -19,8 +19,8 @@
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <artifactId>tez-plugins</artifactId>
-    <groupId>org.apache.tez</groupId>
-    <version>0.9.1</version>
+    <groupId>io.hops.tez</groupId>
+    <version>0.9.1.1-SNAPSHOT</version>
     <relativePath>../pom.xml</relativePath>
   </parent>
 
@@ -94,12 +94,12 @@
       <scope>provided</scope>
     </dependency>
     <dependency>
-      <groupId>org.apache.tez</groupId>
+      <groupId>io.hops.tez</groupId>
       <artifactId>tez-api</artifactId>
     </dependency>
     <dependency>
       <!-- Required for the ShuffleHandler -->
-      <groupId>org.apache.tez</groupId>
+      <groupId>io.hops.tez</groupId>
       <artifactId>tez-runtime-library</artifactId>
     </dependency>
     <dependency>
@@ -141,7 +141,7 @@
       <type>test-jar</type>
     </dependency>
    <dependency>
-     <groupId>org.apache.tez</groupId>
+     <groupId>io.hops.tez</groupId>
      <artifactId>tez-tests</artifactId>
      <scope>test</scope>
      <type>test-jar</type>
@@ -161,7 +161,7 @@
      <type>test-jar</type>
   </dependency>
   <dependency>
-     <groupId>org.apache.tez</groupId>
+     <groupId>io.hops.tez</groupId>
      <artifactId>tez-dag</artifactId>
      <scope>test</scope>
    </dependency>

@@ -19,11 +19,19 @@
 package org.apache.tez.dag.app;
 
 import static com.google.common.base.Preconditions.checkNotNull;
+import static org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory.SSL_KEYSTORE_KEYPASSWORD_TPL_KEY;
+import static org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory.SSL_KEYSTORE_LOCATION_TPL_KEY;
+import static org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory.SSL_KEYSTORE_PASSWORD_TPL_KEY;
+import static org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory.SSL_TRUSTSTORE_LOCATION_TPL_KEY;
+import static org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory.SSL_TRUSTSTORE_PASSWORD_TPL_KEY;
+import static org.apache.hadoop.security.ssl.FileBasedKeyStoresFactory.resolvePropertyName;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -62,10 +70,14 @@ import com.google.common.collect.BiMap;
 import com.google.common.collect.HashBiMap;
 import com.google.common.collect.Lists;
 
+import io.hops.security.HopsUtil;
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.GnuParser;
 import org.apache.commons.cli.Options;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.hadoop.fs.CommonConfigurationKeysPublic;
+import org.apache.hadoop.net.HopsSSLSocketFactory;
+import org.apache.hadoop.security.ssl.SSLFactory;
 import org.apache.tez.client.CallerContext;
 import org.apache.tez.client.TezClientUtils;
 import org.apache.tez.common.TezUtils;
@@ -507,6 +519,16 @@ public class DAGAppMaster extends AbstractService {
           + " tezSystemStagingDir :" + tezSystemStagingDir + " recoveryDataDir :" + recoveryDataDir
           + " recoveryAttemptDir :" + currentRecoveryDataDir);
     }
+
+    /*
+     *  If HopsTLS is enabled we need to dump the information about the user certificates to a file
+     *  in the current working directory called ssl-server.xml so that the RPC servers can bootstrap
+     */
+    if (conf.getBoolean(CommonConfigurationKeysPublic.IPC_SERVER_SSL_ENABLED,
+        CommonConfigurationKeysPublic.IPC_SERVER_SSL_ENABLED_DEFAULT)) {
+      HopsUtil.generateContainerSSLServerConfiguration(conf);
+    }
+
     recoveryEnabled = conf.getBoolean(TezConfiguration.DAG_RECOVERY_ENABLED,
         TezConfiguration.DAG_RECOVERY_ENABLED_DEFAULT);
 
