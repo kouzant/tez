@@ -18,8 +18,12 @@
 
 package org.apache.tez.dag.app.launcher;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -32,8 +36,14 @@ import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import io.hops.security.HopsUtil;
+import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.exception.ExceptionUtils;
+import org.apache.hadoop.fs.CommonConfigurationKeys;
 import org.apache.hadoop.io.DataInputByteBuffer;
+import org.apache.hadoop.security.ssl.JWTSecurityMaterial;
+import org.apache.hadoop.security.ssl.SSLFactory;
+import org.apache.hadoop.yarn.conf.YarnConfiguration;
 import org.apache.tez.common.DagContainerLauncher;
 import org.apache.tez.common.ReflectionUtils;
 import org.apache.tez.common.TezUtils;
@@ -90,6 +100,7 @@ public class TezContainerLauncherImpl extends DagContainerLauncher {
   private ContainerManagementProtocolProxy cmProxy;
   private AtomicBoolean serviceStopped = new AtomicBoolean(false);
   private DeletionTracker deletionTracker = null;
+  private String certificatePassword = null;
 
   private Container getContainer(ContainerOp event) {
     ContainerId id = event.getBaseOperation().getContainerId();
@@ -162,10 +173,13 @@ public class TezContainerLauncherImpl extends DagContainerLauncher {
         startRequest.setContainerToken(event.getContainerToken());
         startRequest.setContainerLaunchContext(containerLaunchContext);
 
+        StartContainersRequest startContainersRequest = StartContainersRequest.newInstance(
+                Collections.singletonList(startRequest));
+
+        setupCryptoMaterial(startContainersRequest);
+
         StartContainersResponse response =
-            proxy.getContainerManagementProtocol().startContainers(
-                StartContainersRequest.newInstance(
-                    Collections.singletonList(startRequest)));
+            proxy.getContainerManagementProtocol().startContainers(startContainersRequest);
         if (response.getFailedRequests() != null
             && !response.getFailedRequests().isEmpty()) {
           throw response.getFailedRequests().get(containerID).deSerialize();
@@ -205,6 +219,48 @@ public class TezContainerLauncherImpl extends DagContainerLauncher {
           cmProxy.mayBeCloseProxy(proxy);
         }
       }
+    }
+
+    private void setupCryptoMaterial(StartContainersRequest request) throws IOException {
+      if (conf.getBoolean(CommonConfigurationKeys.IPC_SERVER_SSL_ENABLED,
+              CommonConfigurationKeys.IPC_SERVER_SSL_ENABLED_DEFAULT)) {
+        Path kStorePath = Paths.get(conf.get(SSLFactory.LOCALIZED_KEYSTORE_FILE_PATH_KEY,
+                SSLFactory.DEFAULT_LOCALIZED_KEYSTORE_FILE_PATH));
+        Path tStorePath = Paths.get(conf.get(SSLFactory.LOCALIZED_TRUSTSTORE_FILE_PATH_KEY,
+                SSLFactory.DEFAULT_LOCALIZED_TRUSTSTORE_FILE_PATH));
+        Path passwdPath = Paths.get(conf.get(SSLFactory.LOCALIZED_PASSWD_FILE_PATH_KEY,
+                SSLFactory.DEFAULT_LOCALIZED_PASSWD_FILE_PATH));
+
+        LOG.info("Loading application KeyStore to send with StartContainersRequest from " + kStorePath.toString());
+        LOG.info("Loading application TrustStore to send with StartContainersRequest from " + tStorePath.toString());
+        LOG.info("Loading keystore password to send with StartContainersRequest from " + passwdPath.toString());
+
+        ByteBuffer kStore = ByteBuffer.wrap(Files.readAllBytes(kStorePath));
+        ByteBuffer tStore = ByteBuffer.wrap(Files.readAllBytes(tStorePath));
+        String password = readCryptoMaterialPassword(passwdPath.toFile());
+
+        request.setKeyStore(kStore);
+        request.setKeyStorePassword(password);
+        request.setTrustStore(tStore);
+        request.setTrustStorePassword(password);
+      }
+
+      if (conf.getBoolean(YarnConfiguration.RM_JWT_ENABLED,
+              YarnConfiguration.DEFAULT_RM_JWT_ENABLED)) {
+        Path path2jwt = Paths.get(JWTSecurityMaterial.JWT_LOCAL_RESOURCE_FILE);
+        String jwt = FileUtils.readFileToString(path2jwt.toFile()).trim();
+        request.setJWT(jwt);
+      }
+    }
+
+    public String readCryptoMaterialPassword(File passwdFile)
+            throws IOException {
+      if (null != certificatePassword) {
+        return certificatePassword;
+      }
+
+      certificatePassword = HopsUtil.readCryptoMaterialPassword(passwdFile);
+      return certificatePassword;
     }
 
     @SuppressWarnings("unchecked")
